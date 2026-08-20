@@ -1,0 +1,44 @@
+LUMI 1.0 FULL LAUNCH — SOURCE / SECURITY / INTEGRITY AUDIT
+Date: 2026-08-20
+Candidate: Lumi 4.0.0-lumi-1.0 / versionCode 247
+Guardian: 1.2-lumi-1.0 / versionCode 3
+STATUS: GREEN FOR APK FACTORY / GITHUB BUILD VALIDATION
+Checks passed: 81 / 81
+
+GREEN AREAS
+- Package/version identities and Guardian companion version.
+- Persistent Memory Vault schema, migration, retrieval, and conversation capture.
+- Portable backup/restore and Guardian recovery checkpoints include Memory Vault continuity.
+- Credentials excluded from portable backup logic; no OpenAI/GitHub token literal detected in text source.
+- OpenAI Responses API reasoning path and bounded local function-tool loop.
+- OpenAI Realtime/WebRTC-ready voice architecture declaration with ephemeral-token broker policy and Android speech/TTS fallback.
+- Native directMaintenanceHostV1 allow-listed maintenance tools.
+- No remote shell or arbitrary-file maintenance tool.
+- HTTPS-only remote/AI update download path and HTTPS-preserving redirects.
+- Remote/AI maintenance packages require trusted Lumi manifest signatures.
+- Core APK replacement verifies package identity, newer version, and Lumi signing certificate.
+- Maintenance write gate requires admin enrollment, unlocked device, and explicit current approval; maintenance can be revoked.
+- Guardian checkpoint occurs before signed update processing; post-update Guardian certification and rollback paths are present.
+- Lumi <-> Guardian providers are protected by Lumi's signature permission.
+- GitHub Actions builds Guardian first, embeds it, builds Lumi, verifies APK signatures/identities, and names the final APK Lumi-1.0-FULL-LAUNCH-Code247.apk.
+- Android XML parses.
+- Maintenance/config JSON parses.
+- GitHub Actions YAML parses.
+- Java source has no parser-level syntax findings in a javac parse pass. (Android type resolution cannot be completed in this container because Android SDK/dependencies are not installed here.)
+- Signing certificate fingerprint matches the pinned Lumi identity:
+  0AD00784E2D593A469CB445D2CC1AFE94E31663768F96470A38144E84EFE8AD2
+
+IMPORTANT: GREEN DOES NOT YET MEAN DEVICE-CERTIFIED
+The following gates require APK Factory/GitHub and the real Android phone:
+1. GitHub/Gradle must compile Guardian and Lumi release APKs successfully.
+2. CI must verify the resulting package names, version codes, and APK signatures.
+3. Lumi 1.0 APK must install successfully on the phone.
+4. Embedded Guardian 1.2 must install, be trusted, and be current.
+5. Lumi 1.0 foundation and Memory Vault must initialize on-device.
+6. Guardian's real Fast Brain certification probe must return visible LUMI_READY.
+7. Portable restore/continuity should be verified after clean install if older local data is being carried forward.
+8. Reboot/relaunch continuity should pass.
+9. One signed modular maintenance update should complete checkpoint -> verify/apply -> certify -> report; a failed test update should prove rollback before the manual APK Factory path is considered routine-retired.
+
+SECURITY NOTE
+This private source package contains the existing Lumi signing keystore needed for signing continuity in the current APK Factory/GitHub workflow. Do not publish this source ZIP or its signing material to a public repository. The runtime design keeps API keys/tokens/signing secrets out of model prompts, Memory Vault entries, diagnostics, and tool outputs.
